@@ -1,4 +1,3 @@
-
 import { Component, OnInit, OnDestroy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -36,12 +35,12 @@ interface FaqItem {
           </div>
           
           <h1 class="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6 leading-[1.1]">
-            Scale Revenue with the <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ff5c35] to-orange-500">Automated Sales Platform.</span>
+            Turn Every Lead into a Deal <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ff5c35] to-orange-500">Faster and Smarter.</span>
           </h1>
           
           <p class="text-lg text-slate-600 mb-8 leading-relaxed max-w-lg">
-            A unified CRM to visualize your pipeline, automate follow-ups, and close more deals. Built for teams who need enterprise power without the complexity.
+            Calsoft CRM is an easy-to-use, no-code CRM that streamlines sales workflows, automates follow-ups, and helps teams close more deals with less effort.
           </p>
           
           <div class="flex flex-col sm:flex-row gap-4">
@@ -275,6 +274,145 @@ interface FaqItem {
     </div>
   </section>
 
+  <!-- Built for Teams Section -->
+  <section class="py-20 bg-slate-50 border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Built for Teams That Sell Every Day</h2>
+        <p class="text-xl text-slate-500">
+          Calsoft CRM is designed for sales-driven organizations that need clarity, speed, and control—without complex setup or coding.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-4">
+          <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0"><span class="material-symbols-outlined">rocket_launch</span></div>
+          <div>
+            <h3 class="font-bold text-slate-900">Startups & Growing Businesses</h3>
+            <p class="text-sm text-slate-600 mt-1">Flexible tools that scale from your first hire to your hundredth.</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-4">
+          <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0"><span class="material-symbols-outlined">groups</span></div>
+          <div>
+            <h3 class="font-bold text-slate-900">B2B & B2C Sales Teams</h3>
+            <p class="text-sm text-slate-600 mt-1">Manage complex deal cycles or high-volume transactional sales.</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-4">
+          <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0"><span class="material-symbols-outlined">headset_mic</span></div>
+          <div>
+            <h3 class="font-bold text-slate-900">Inside Sales & Telecalling</h3>
+            <p class="text-sm text-slate-600 mt-1">Integrated dialers and automated call logging for high-velocity teams.</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-4">
+          <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0"><span class="material-symbols-outlined">design_services</span></div>
+          <div>
+            <h3 class="font-bold text-slate-900">Service & Consulting</h3>
+            <p class="text-sm text-slate-600 mt-1">Track client projects from proposal to payment in one unified pipeline.</p>
+          </div>
+        </div>
+         <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-4">
+          <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0"><span class="material-symbols-outlined">school</span></div>
+          <div>
+            <h3 class="font-bold text-slate-900">Education & Real Estate</h3>
+            <p class="text-sm text-slate-600 mt-1">Manage long-term nurturing for high-value, considered purchases.</p>
+          </div>
+        </div>
+         <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-4">
+          <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0"><span class="material-symbols-outlined">cloud</span></div>
+          <div>
+            <h3 class="font-bold text-slate-900">SaaS Businesses</h3>
+            <p class="text-sm text-slate-600 mt-1">Track trial signups, product demos, and subscription renewals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it Works Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-slate-900">How Calsoft CRM Works</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center relative">
+        <!-- Connecting lines -->
+        <div class="hidden lg:block absolute top-1/2 left-0 w-full h-px -mt-4">
+          <div class="max-w-3xl mx-auto h-px border-t border-dashed border-slate-300"></div>
+        </div>
+        
+        <!-- Step 1 -->
+        <div class="flex flex-col items-center z-10">
+          <div class="w-20 h-20 bg-slate-50 border border-slate-200 rounded-full flex items-center justify-center mb-4 shadow-sm">
+            <span class="text-4xl">📥</span>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-2">1. Capture Every Lead</h3>
+          <p class="text-sm text-slate-600">Collect leads from websites, ads, WhatsApp, and social platforms in one place.</p>
+        </div>
+        <!-- Step 2 -->
+        <div class="flex flex-col items-center z-10">
+          <div class="w-20 h-20 bg-slate-50 border border-slate-200 rounded-full flex items-center justify-center mb-4 shadow-sm">
+            <span class="text-4xl">🗂️</span>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-2">2. Organize & Assign</h3>
+          <p class="text-sm text-slate-600">Manage leads, assign ownership, and track progress across your pipeline.</p>
+        </div>
+        <!-- Step 3 -->
+        <div class="flex flex-col items-center z-10">
+          <div class="w-20 h-20 bg-slate-50 border border-slate-200 rounded-full flex items-center justify-center mb-4 shadow-sm">
+            <span class="text-4xl">⏰</span>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-2">3. Follow Up on Time</h3>
+          <p class="text-sm text-slate-600">Create follow-ups, set reminders, and stay consistent with every opportunity.</p>
+        </div>
+        <!-- Step 4 -->
+        <div class="flex flex-col items-center z-10">
+          <div class="w-20 h-20 bg-slate-50 border border-slate-200 rounded-full flex items-center justify-center mb-4 shadow-sm">
+            <span class="text-4xl">🎯</span>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-2">4. Track, Analyze & Close</h3>
+          <p class="text-sm text-slate-600">Use real-time reports and dashboards to improve performance and close more deals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="py-20 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900">Why Teams Choose Calsoft CRM</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+        <div class="flex items-start gap-3">
+          <span class="material-symbols-outlined text-green-500 mt-1">check_circle</span>
+          <p class="text-slate-700">Simple, no-code setup</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="material-symbols-outlined text-green-500 mt-1">check_circle</span>
+          <p class="text-slate-700">User-friendly interface for sales teams</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="material-symbols-outlined text-green-500 mt-1">check_circle</span>
+          <p class="text-slate-700">Powerful pipeline & reporting tools</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="material-symbols-outlined text-green-500 mt-1">check_circle</span>
+          <p class="text-slate-700">WhatsApp and omni-channel lead management</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="material-symbols-outlined text-green-500 mt-1">check_circle</span>
+          <p class="text-slate-700">Flexible workflows without forced automation</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="material-symbols-outlined text-green-500 mt-1">check_circle</span>
+          <p class="text-slate-700">Transparent pricing with scalable plans</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Big Stats Section -->
   <section class="py-24 bg-slate-900 text-white relative overflow-hidden">
      <!-- Abstract cubes/shapes -->
@@ -460,7 +598,7 @@ interface FaqItem {
   </section>
 
   <!-- FAQ Section -->
-  <section class="py-24 bg-white">
+  <section class="py-24">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
@@ -468,7 +606,7 @@ interface FaqItem {
       </div>
       <div class="space-y-4">
         @for (faq of faqs; track $index; let i = $index) {
-          <div class="bg-slate-50 rounded-xl border border-slate-100 overflow-hidden transition-all duration-300">
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition-all duration-300">
             <button (click)="toggleFaq(i)" class="w-full flex justify-between items-center text-left p-6">
               <span class="font-bold text-lg text-slate-900">{{ faq.question }}</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-500 transition-transform duration-300" [class.rotate-180]="openFaqIndex() === i">

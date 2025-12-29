@@ -1,4 +1,3 @@
-
 import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -10,6 +9,11 @@ interface Integration {
   color: string;
   status: 'Active' | 'Connect';
   popular?: boolean;
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
 }
 
 @Component({
@@ -129,30 +133,41 @@ interface Integration {
 
         <!-- FAQ Section -->
         <div class="mt-20 pt-12 border-t border-slate-200">
-          <h2 class="text-3xl font-bold text-slate-900 mb-10 text-center">Frequently Asked Questions</h2>
-          <div class="grid md:grid-cols-2 gap-8">
-              <div class="bg-white p-6 rounded-xl border border-slate-200">
-                  <h3 class="font-bold text-slate-900 mb-2">Are these integrations free?</h3>
-                  <p class="text-slate-600 text-sm">Most native integrations (Google, Meta, Slack) are included in all plans. Some premium integrations may require a Zapier account.</p>
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+            <p class="text-lg text-slate-500 mt-2">Have questions? We've got answers.</p>
+          </div>
+          <div class="space-y-4 max-w-4xl mx-auto">
+            @for (faq of faqs; track $index; let i = $index) {
+              <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition-all duration-300">
+                <button (click)="toggleFaq(i)" class="w-full flex justify-between items-center text-left p-6">
+                  <span class="font-bold text-lg text-slate-900">{{ faq.question }}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-500 transition-transform duration-300" [class.rotate-180]="openFaqIndex() === i">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                </button>
+                @if (openFaqIndex() === i) {
+                  <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed animate-fade-in">
+                    <p [innerHTML]="faq.answer"></p>
+                  </div>
+                }
               </div>
-              <div class="bg-white p-6 rounded-xl border border-slate-200">
-                  <h3 class="font-bold text-slate-900 mb-2">Do you have a public API?</h3>
-                  <p class="text-slate-600 text-sm">Yes, our REST API is available on the Enterprise plan for building custom connections to your proprietary systems.</p>
-              </div>
-              <div class="bg-white p-6 rounded-xl border border-slate-200">
-                  <h3 class="font-bold text-slate-900 mb-2">How often does data sync?</h3>
-                  <p class="text-slate-600 text-sm">Native integrations like Google Calendar and Meta Ads sync in near real-time (usually within seconds).</p>
-              </div>
-              <div class="bg-white p-6 rounded-xl border border-slate-200">
-                  <h3 class="font-bold text-slate-900 mb-2">Can I connect multiple accounts?</h3>
-                  <p class="text-slate-600 text-sm">Yes, you can connect multiple Gmail or Calendar accounts depending on your user license count.</p>
-              </div>
+            }
           </div>
         </div>
 
       </div>
     </div>
-  `
+  `,
+  styles: [`
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+  `]
 })
 export class IntegrationsComponent {
   searchQuery = signal('');
@@ -241,8 +256,21 @@ export class IntegrationsComponent {
     });
   });
 
+  openFaqIndex = signal<number | null>(null);
+
+  faqs: FaqItem[] = [
+      { question: 'Are these integrations free?', answer: 'Most native integrations (Google, Meta, Slack) are included in all plans. Some premium integrations may require a Zapier account.' },
+      { question: 'Do you have a public API?', answer: 'Yes, our REST API is available on the Enterprise plan for building custom connections to your proprietary systems.' },
+      { question: 'How often does data sync?', answer: 'Native integrations like Google Calendar and Meta Ads sync in near real-time (usually within seconds).' },
+      { question: 'Can I connect multiple accounts?', answer: 'Yes, you can connect multiple Gmail or Calendar accounts depending on your user license count.' }
+  ];
+
   updateSearch(event: Event) {
     const input = event.target as HTMLInputElement;
     this.searchQuery.set(input.value);
+  }
+
+  toggleFaq(index: number) {
+    this.openFaqIndex.update(current => (current === index ? null : index));
   }
 }

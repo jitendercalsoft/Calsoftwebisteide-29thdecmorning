@@ -1,4 +1,3 @@
-
 import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -14,6 +13,11 @@ interface Category {
   title: string;
   icon: string;
   features: Feature[];
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
 }
 
 @Component({
@@ -67,7 +71,7 @@ interface Category {
 
       <!-- Pricing Table -->
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 -mt-10 relative z-20">
-        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 ring-1 ring-slate-900/5">
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 ring-1 ring-slate-900/5 pt-6">
             
             <!-- Plans Header -->
             <div class="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-200 bg-slate-50">
@@ -78,95 +82,39 @@ interface Category {
                 </div>
 
                 <!-- Basic Plan -->
-                <div class="p-8 text-center relative hover:bg-white transition-colors group flex flex-col h-full">
-                    <h3 class="text-lg font-bold text-slate-900">Basic</h3>
+                <div class="p-8 text-center relative hover:bg-white transition-colors group">
+                    <h3 class="text-lg font-bold text-slate-900">Basic (Starter)</h3>
                     <div class="mt-4 flex items-baseline justify-center text-slate-900">
                         <span class="text-4xl font-extrabold tracking-tight">{{ currentPrices().basic }}</span>
                         <span class="ml-1 text-sm font-medium text-slate-500">/user/mo</span>
                     </div>
                     <p class="mt-2 text-xs text-slate-400 font-medium uppercase tracking-wide">billed {{ billing() }}</p>
-
-                    <ul class="my-6 space-y-3 text-sm text-slate-600 text-left">
-                        <li class="flex items-start gap-2">
-                           <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                           Up to 5 Users
-                        </li>
-                        <li class="flex items-start gap-2">
-                           <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                           1 Sales Pipeline
-                        </li>
-                        <li class="flex items-start gap-2">
-                           <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                           Web Lead Capture
-                        </li>
-                    </ul>
-                    
-                    <button class="mt-auto w-full bg-white border border-slate-300 text-slate-700 hover:border-slate-400 hover:text-slate-900 font-bold py-3 px-4 rounded-xl transition-all shadow-sm">Get Started</button>
+                    <button class="mt-6 w-full bg-white border border-slate-300 text-slate-700 hover:border-slate-400 hover:text-slate-900 font-bold py-3 px-4 rounded-xl transition-all shadow-sm">Get Started</button>
                 </div>
 
                 <!-- Pro Plan -->
-                <div class="p-8 text-center relative bg-indigo-50/40 hover:bg-indigo-50/80 transition-colors border-t-4 border-indigo-600 md:border-t-0 md:border-t-transparent shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)] flex flex-col h-full">
+                <div class="p-8 text-center relative bg-indigo-50/40 hover:bg-indigo-50/80 transition-colors border-t-4 border-indigo-600 md:border-t-0 md:border-t-transparent shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)]">
                     <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-indigo-600 text-white px-4 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase shadow-lg ring-4 ring-white">
                         Most Popular
                     </div>
-                    <h3 class="text-lg font-bold text-indigo-900">Pro Growth</h3>
+                    <h3 class="text-lg font-bold text-indigo-900">Pro (Growth)</h3>
                     <div class="mt-4 flex items-baseline justify-center text-indigo-900">
                         <span class="text-5xl font-extrabold tracking-tight">{{ currentPrices().pro }}</span>
                         <span class="ml-1 text-sm font-medium text-indigo-600">/user/mo</span>
                     </div>
                     <p class="mt-2 text-xs text-indigo-400 font-medium uppercase tracking-wide">billed {{ billing() }}</p>
-
-                    <ul class="my-6 space-y-3 text-sm text-slate-700 text-left">
-                        <li class="flex items-start gap-2">
-                           <svg class="w-5 h-5 text-indigo-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                           Up to 25 Users
-                        </li>
-                        <li class="flex items-start gap-2">
-                           <svg class="w-5 h-5 text-indigo-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                           WhatsApp & Email Automation
-                        </li>
-                        <li class="flex items-start gap-2">
-                           <svg class="w-5 h-5 text-indigo-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                           Smart Lead Routing
-                        </li>
-                        <li class="flex items-start gap-2">
-                           <svg class="w-5 h-5 text-indigo-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                           5 Pipelines
-                        </li>
-                    </ul>
-
-                    <button class="mt-auto w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg shadow-indigo-200 hover:shadow-indigo-300 hover:-translate-y-0.5">Start Free Trial</button>
+                    <button class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg shadow-indigo-200 hover:shadow-indigo-300 hover:-translate-y-0.5">Start Free Trial</button>
                 </div>
 
                 <!-- Advanced Plan -->
-                <div class="p-8 text-center relative hover:bg-white transition-colors flex flex-col h-full">
-                    <h3 class="text-lg font-bold text-slate-900">Enterprise</h3>
+                <div class="p-8 text-center relative hover:bg-white transition-colors">
+                    <h3 class="text-lg font-bold text-slate-900">Advanced (Enterprise)</h3>
                     <div class="mt-4 flex items-baseline justify-center text-slate-900">
                         <span class="text-4xl font-extrabold tracking-tight">{{ currentPrices().advanced }}</span>
                         <span class="ml-1 text-sm font-medium text-slate-500">/user/mo</span>
                     </div>
                     <p class="mt-2 text-xs text-slate-400 font-medium uppercase tracking-wide">billed {{ billing() }}</p>
-
-                    <ul class="my-6 space-y-3 text-sm text-slate-600 text-left">
-                        <li class="flex items-start gap-2">
-                           <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                           100+ Users
-                        </li>
-                        <li class="flex items-start gap-2">
-                           <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                           Full API Access & Webhooks
-                        </li>
-                        <li class="flex items-start gap-2">
-                           <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                           Auto Dialer + IVR
-                        </li>
-                        <li class="flex items-start gap-2">
-                           <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                           Unlimited Pipelines
-                        </li>
-                    </ul>
-
-                    <button class="mt-auto w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg hover:shadow-xl">Contact Sales</button>
+                    <button class="mt-6 w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg hover:shadow-xl">Contact Sales</button>
                 </div>
             </div>
 
@@ -194,8 +142,16 @@ interface Category {
                           [class.hover:bg-slate-50]="true"> 
                         
                         <!-- Feature Name -->
-                        <div class="p-4 md:px-8 md:py-5 text-sm font-semibold text-slate-700 flex items-center">
-                            {{ feat.name }}
+                        <div class="p-4 md:px-8 md:py-5 text-sm font-semibold text-slate-700 flex items-center gap-1.5">
+                            <span>{{ feat.name }}</span>
+                            @if (feat.name.includes('WhatsApp')) {
+                                <div class="relative group cursor-help">
+                                    <span class="material-symbols-outlined text-slate-400 text-sm">info</span>
+                                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-slate-800 text-white text-xs p-3 rounded-lg shadow-lg z-10 hidden group-hover:block text-left font-normal normal-case leading-relaxed">
+                                        WhatsApp Business API setup requires necessary business verification documents as per Meta's policy. Our team will guide you through the process.
+                                    </div>
+                                </div>
+                            }
                         </div>
 
                         <!-- Basic Value -->
@@ -236,25 +192,27 @@ interface Category {
         
         <!-- FAQ Section for SEO -->
         <div class="mt-24 max-w-4xl mx-auto">
-           <h2 class="text-3xl font-bold text-slate-900 text-center mb-12">Frequently Asked Questions</h2>
-           <div class="grid gap-6">
-             <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-               <h3 class="font-bold text-lg text-slate-900 mb-2">Can I switch plans later?</h3>
-               <p class="text-slate-600">Absolutely. You can upgrade or downgrade your plan at any time. Changes will be prorated on your next billing cycle.</p>
-             </div>
-             <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-               <h3 class="font-bold text-lg text-slate-900 mb-2">Is the WhatsApp API integration included?</h3>
-               <p class="text-slate-600">Yes, WhatsApp Business API integration is available on the <strong>Pro</strong> and <strong>Enterprise</strong> plans. Standard messaging costs from Meta apply.</p>
-             </div>
-             <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-               <h3 class="font-bold text-lg text-slate-900 mb-2">Do you offer a free trial?</h3>
-               <p class="text-slate-600">Yes! We offer a 14-day free trial for the Pro plan. No credit card required to get started.</p>
-             </div>
-             <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-               <h3 class="font-bold text-lg text-slate-900 mb-2">Can I import data from Excel or other CRMs?</h3>
-               <p class="text-slate-600">Yes, our bulk import tool allows you to map fields from CSV or Excel files directly into Calsoft CRM. We also offer migration services for Enterprise plans.</p>
-             </div>
-           </div>
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+            <p class="text-lg text-slate-500 mt-2">Have questions? We've got answers.</p>
+          </div>
+          <div class="space-y-4">
+            @for (faq of faqs; track $index; let i = $index) {
+              <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition-all duration-300">
+                <button (click)="toggleFaq(i)" class="w-full flex justify-between items-center text-left p-6">
+                  <span class="font-bold text-lg text-slate-900">{{ faq.question }}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-500 transition-transform duration-300" [class.rotate-180]="openFaqIndex() === i">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                </button>
+                @if (openFaqIndex() === i) {
+                  <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed animate-fade-in">
+                    <p [innerHTML]="faq.answer"></p>
+                  </div>
+                }
+              </div>
+            }
+          </div>
         </div>
 
       </div>
@@ -277,7 +235,16 @@ interface Category {
              <span class="text-slate-700 font-semibold text-sm">{{ val }}</span>
         }
     </ng-template>
-  `
+  `,
+  styles: [`
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+  `]
 })
 export class PricingComponent {
   currency = signal<'USD' | 'INR'>('INR');
@@ -301,58 +268,85 @@ export class PricingComponent {
   categories: Category[] = [
     {
         id: 'core',
-        title: 'Core CRM',
+        title: 'CORE CRM',
         icon: 'hub',
         features: [
-            { name: 'User/Contacts Management', basic: 'Up to 5', pro: 'Up to 25', advanced: 'Up to 100' },
+            { name: 'User / Contacts Management', basic: 'Up to 5', pro: 'Up to 25', advanced: 'Up to 100' },
             { name: 'Import Custom Excel', basic: true, pro: true, advanced: true },
             { name: 'Smart View / Custom Grid', basic: 'Basic', pro: 'Advanced', advanced: 'Advanced' },
-            { name: 'Deals Pipeline', basic: '1 Pipeline', pro: '5 Pipelines', advanced: 'Unlimited' },
-            { name: 'Mobile App Access', basic: 'Basic', pro: 'Full Access', advanced: 'Full Access' }
+            { name: 'Deals Management (Opportunity)', basic: 'Basic Pipeline', pro: 'Multiple Pipelines', advanced: 'Unlimited Pipelines' },
+            { name: 'Task & Activity Tracking', basic: true, pro: true, advanced: true },
+            { name: 'Duplicate Management', basic: true, pro: true, advanced: true },
+            { name: 'Files Upload', basic: '500 MB / user', pro: '5 GB / user', advanced: '20 GB / user' },
+            { name: 'Mobile Access', basic: 'Basic App', pro: 'Full App', advanced: 'Full App' }
         ]
     },
     {
         id: 'comm',
-        title: 'Communication',
+        title: 'COMMUNICATION',
         icon: 'chat',
         features: [
-            { name: 'Integrated Dialer', basic: 'Manual Log', pro: 'Click-to-Call', advanced: 'Auto Dialer + IVR' },
-            { name: 'WhatsApp Business API (GST Doc Mandatory)', basic: false, pro: 'Standard', advanced: 'Advanced Bot' },
-            { name: 'Bulk Email Sequencing', basic: false, pro: true, advanced: true },
-            { name: 'Meeting Scheduler', basic: false, pro: true, advanced: true },
+            { name: 'Integrated Dialer', basic: 'Manual Log', pro: 'Click-to-Call + Recording', advanced: 'Auto Dialer + IVR' },
+            { name: 'Bulk WhatsApp & Bot', basic: false, pro: 'Limited', advanced: 'Advanced Bot' },
+            { name: 'Bulk Email & Templates', basic: false, pro: true, advanced: true },
+            { name: 'Remainder & Notification', basic: 'Standard', pro: 'Smart Reminders', advanced: 'AI-Based Nudges' },
+            { name: 'Google Meet Integration', basic: false, pro: true, advanced: true },
+            { name: 'Interaction History', basic: 'Basic', pro: 'Full History', advanced: 'Full History + Audit Log' }
         ]
     },
     {
         id: 'auto',
-        title: 'Automation',
+        title: 'AUTOMATION',
         icon: 'bolt',
         features: [
-            { name: 'Web Lead Capture', basic: true, pro: true, advanced: true },
-            { name: 'Workflow Rules', basic: false, pro: '10 Rules', advanced: 'Unlimited' },
-            { name: 'Lead Distribution (Round Robin)', basic: false, pro: true, advanced: true },
-            { name: 'Speed-to-Lead Triggers', basic: false, pro: true, advanced: true },
-        ]
-    },
-    {
-        id: 'integ',
-        title: 'Integration',
-        icon: 'integration_instructions',
-        features: [
-            { name: 'API & Webhooks', basic: false, pro: 'Webhooks', advanced: 'Full API Access' },
-            { name: 'Native Integrations (Google, Meta)', basic: false, pro: true, advanced: true },
-            { name: 'In-Chat Payments', basic: false, pro: true, advanced: true },
+            { name: 'Automated Lead Capture', basic: true, pro: true, advanced: true },
+            { name: 'Automated Lead Assessment', basic: false, pro: true, advanced: true },
+            { name: 'Efficient Lead Distribution', basic: false, pro: 'Round Robin', advanced: 'Advanced Logic' },
+            { name: 'Workflow Automation', basic: false, pro: 'Standard (10 Rules)', advanced: 'Advanced (Unlimited)' },
+            { name: 'Lead Scoring', basic: false, pro: true, advanced: true }
         ]
     },
     {
         id: 'mgmt',
-        title: 'Security & Support',
-        icon: 'admin_panel_settings',
+        title: 'MANAGEMENT',
+        icon: 'shield',
         features: [
-            { name: 'Role-Based Permissions', basic: false, pro: 'Standard', advanced: 'Granular' },
-            { name: 'Data Export', basic: true, pro: true, advanced: true },
-            { name: 'Priority Support', basic: false, pro: false, advanced: true }
+            { name: 'Hierarchy-based Restrictions', basic: false, pro: false, advanced: 'Role Based' },
+            { name: 'Location Tracking (App)', basic: false, pro: false, advanced: 'Field Force' },
+            { name: 'Company Management', basic: 'Basic', pro: true, advanced: 'Parent-Child Hierarchy' },
+            { name: 'Dashboard / Analytics', basic: 'Standard', pro: 'Advanced', advanced: 'Customizable BI' },
+            { name: 'Reports', basic: 'Standard', pro: 'Custom Reports', advanced: 'Advanced Scheduled Reports' }
+        ]
+    },
+    {
+        id: 'integ',
+        title: 'INTEGRATION',
+        icon: 'integration_instructions',
+        features: [
+            { name: 'API and Webhooks', basic: false, pro: 'Webhooks', advanced: 'Full API Access' },
+            { name: 'Native Integration', basic: false, pro: true, advanced: true },
+            { name: 'Invoice / Quotation', basic: false, pro: true, advanced: true },
+            { name: 'Lead imports', basic: true, pro: true, advanced: true }
+        ]
+    },
+    {
+        id: 'soon',
+        title: 'COMING SOON',
+        icon: 'rocket_launch',
+        features: [
+            { name: 'Sequencing', basic: false, pro: 'Coming Soon', advanced: 'Coming Soon' },
+            { name: 'Outlook Integration', basic: false, pro: 'Coming Soon', advanced: 'Coming Soon' }
         ]
     }
+  ];
+  
+  openFaqIndex = signal<number | null>(null);
+
+  faqs: FaqItem[] = [
+    { question: 'Can I switch plans later?', answer: 'Absolutely. You can upgrade or downgrade your plan at any time. Changes will be prorated on your next billing cycle.' },
+    { question: 'Is the WhatsApp API integration included?', answer: 'Yes, WhatsApp Business API integration is available on the <strong>Pro</strong> and <strong>Enterprise</strong> plans. Standard messaging costs from Meta apply.' },
+    { question: 'Do you offer a free trial?', answer: 'Yes! We offer a 14-day free trial for the Pro plan. No credit card required to get started.' },
+    { question: 'Can I import data from Excel or other CRMs?', answer: 'Yes, our bulk import tool allows you to map fields from CSV or Excel files directly into Calsoft CRM. We also offer migration services for Enterprise plans.' }
   ];
 
   toggleCurrency() {
@@ -365,5 +359,9 @@ export class PricingComponent {
 
   isString(val: any): val is string {
     return typeof val === 'string';
+  }
+  
+  toggleFaq(index: number) {
+    this.openFaqIndex.update(current => (current === index ? null : index));
   }
 }

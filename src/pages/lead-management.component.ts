@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
 
 @Component({
   selector: 'app-lead-management',
@@ -84,27 +89,51 @@ import { CommonModule } from '@angular/common';
 
       <!-- FAQ Section -->
       <div class="mt-20 pt-12 border-t border-slate-200">
-        <h2 class="text-3xl font-bold text-slate-900 mb-10 text-center">Frequently Asked Questions</h2>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-2">Which channels can I capture leads from?</h3>
-                <p class="text-slate-600 text-sm">You can automatically capture leads from web forms, Google/Facebook Ads, marketplaces like IndiaMart and JustDial, WhatsApp, and email inboxes.</p>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+          <p class="text-lg text-slate-500 mt-2">Have questions? We've got answers.</p>
+        </div>
+        <div class="space-y-4 max-w-4xl mx-auto">
+          @for (faq of faqs; track $index; let i = $index) {
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition-all duration-300">
+              <button (click)="toggleFaq(i)" class="w-full flex justify-between items-center text-left p-6">
+                <span class="font-bold text-lg text-slate-900">{{ faq.question }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-500 transition-transform duration-300" [class.rotate-180]="openFaqIndex() === i">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+              @if (openFaqIndex() === i) {
+                <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed animate-fade-in">
+                  <p [innerHTML]="faq.answer"></p>
+                </div>
+              }
             </div>
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-2">How are leads assigned to my team?</h3>
-                <p class="text-slate-600 text-sm">Leads can be assigned automatically using round-robin distribution or rule-based workflows based on territory, product interest, or other custom criteria.</p>
-            </div>
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-2">Does the system prevent duplicate leads?</h3>
-                <p class="text-slate-600 text-sm">Yes, Calsoft CRM automatically detects and provides an option to merge duplicate lead entries, ensuring a clean and accurate database.</p>
-            </div>
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-2">Can I track which lead sources are most effective?</h3>
-                <p class="text-slate-600 text-sm">Yes, our built-in analytics and real-time dashboards provide detailed ROI data for each lead source, helping you optimize your marketing spend.</p>
-            </div>
+          }
         </div>
       </div>
     </div>
-  `
+  `,
+  styles: [`
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+  `]
 })
-export class LeadManagementComponent {}
+export class LeadManagementComponent {
+  openFaqIndex = signal<number | null>(null);
+
+  faqs: FaqItem[] = [
+    { question: 'Which channels can I capture leads from?', answer: 'You can automatically capture leads from web forms, Google/Facebook Ads, marketplaces like IndiaMart and JustDial, WhatsApp, and email inboxes.' },
+    { question: 'How are leads assigned to my team?', answer: 'Leads can be assigned automatically using round-robin distribution or rule-based workflows based on territory, product interest, or other custom criteria.' },
+    { question: 'Does the system prevent duplicate leads?', answer: 'Yes, Calsoft CRM automatically detects and provides an option to merge duplicate lead entries, ensuring a clean and accurate database.' },
+    { question: 'Can I track which lead sources are most effective?', answer: 'Yes, our built-in analytics and real-time dashboards provide detailed ROI data for each lead source, helping you optimize your marketing spend.' }
+  ];
+
+  toggleFaq(index: number) {
+    this.openFaqIndex.update(current => (current === index ? null : index));
+  }
+}

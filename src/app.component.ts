@@ -1,4 +1,3 @@
-
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
@@ -118,7 +117,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
               <a routerLink="/roi-calculator" routerLinkActive="text-[#ff5c35]" class="text-sm font-semibold text-slate-700 hover:text-[#ff5c35] transition-colors">Calculator</a>
 
               <a routerLink="/pricing" class="text-sm font-semibold text-slate-700 hover:text-[#ff5c35] transition-colors">Pricing</a>
-              <a routerLink="/resources" class="text-sm font-semibold text-slate-700 hover:text-[#ff5c35] transition-colors">Resources</a>
+              <a routerLink="/blog" class="text-sm font-semibold text-slate-700 hover:text-[#ff5c35] transition-colors">Blog</a>
               <a routerLink="/partner" class="text-sm font-semibold text-slate-700 hover:text-[#ff5c35] transition-colors">Partner</a>
               <a routerLink="/about" class="text-sm font-semibold text-slate-700 hover:text-[#ff5c35] transition-colors">Company</a>
             </div>
@@ -212,8 +211,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
                 <div>
                     <h4 class="text-white font-bold mb-6">Resources</h4>
                     <ul class="space-y-3 text-sm">
-                        <li><a routerLink="/resources" class="hover:text-[#ff5c35] transition-colors">Blog</a></li>
-                        <li><a routerLink="/resources" class="hover:text-[#ff5c35] transition-colors">Ebooks & Guides</a></li>
+                        <li><a routerLink="/blog" class="hover:text-[#ff5c35] transition-colors">Blog</a></li>
+                        <li><a routerLink="/blog" class="hover:text-[#ff5c35] transition-colors">Ebooks & Guides</a></li>
                         <li><a href="#" class="hover:text-[#ff5c35] transition-colors">Customer Stories</a></li>
                         <li><a href="#" class="hover:text-[#ff5c35] transition-colors">Developers API</a></li>
                         <li><a href="#" class="hover:text-[#ff5c35] transition-colors">Help Center</a></li>

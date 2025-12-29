@@ -8,6 +8,11 @@ interface Message {
   sender: 'me' | 'them';
 }
 
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 @Component({
   selector: 'app-whatsapp',
   imports: [CommonModule, FormsModule],
@@ -201,28 +206,39 @@ interface Message {
 
       <!-- FAQ Section -->
       <div class="mt-20 pt-12 border-t border-slate-200">
-        <h2 class="text-3xl font-bold text-slate-900 mb-10 text-center">Frequently Asked Questions</h2>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-2">Can I keep my existing WhatsApp number?</h3>
-                <p class="text-slate-600 text-sm">Yes, you can migrate your existing number to the WhatsApp Business API. Note that once migrated, it cannot be used on the standard WhatsApp mobile app.</p>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+          <p class="text-lg text-slate-500 mt-2">Have questions? We've got answers.</p>
+        </div>
+        <div class="space-y-4 max-w-4xl mx-auto">
+          @for (faq of faqs; track $index; let i = $index) {
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition-all duration-300">
+              <button (click)="toggleFaq(i)" class="w-full flex justify-between items-center text-left p-6">
+                <span class="font-bold text-lg text-slate-900">{{ faq.question }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-500 transition-transform duration-300" [class.rotate-180]="openFaqIndex() === i">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+              @if (openFaqIndex() === i) {
+                <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed animate-fade-in">
+                  <p [innerHTML]="faq.answer"></p>
+                </div>
+              }
             </div>
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-2">Is there an extra cost for WhatsApp messages?</h3>
-                <p class="text-slate-600 text-sm">Yes, WhatsApp charges a small fee per conversation (24-hour window) initiated by the business. User-initiated conversations are often free or cheaper.</p>
-            </div>
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-2">Does it support images and videos?</h3>
-                <p class="text-slate-600 text-sm">Yes, you can send and receive images, videos, PDFs, and documents directly within the CRM interface.</p>
-            </div>
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-2">What happens if I get blocked?</h3>
-                <p class="text-slate-600 text-sm">We provide tools to manage your "Quality Rating" and ensure compliance with Meta's policies to prevent blocking. We also support template pre-approval.</p>
-            </div>
+          }
         </div>
       </div>
     </div>
-  `
+  `,
+  styles: [`
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+  `]
 })
 export class WhatsappComponent {
   messages = signal<Message[]>([
@@ -234,6 +250,15 @@ export class WhatsappComponent {
 
   newMessage = '';
 
+  openFaqIndex = signal<number | null>(null);
+
+  faqs: FaqItem[] = [
+    { question: 'Can I keep my existing WhatsApp number?', answer: 'Yes, you can migrate your existing number to the WhatsApp Business API. Note that once migrated, it cannot be used on the standard WhatsApp mobile app.' },
+    { question: 'Is there an extra cost for WhatsApp messages?', answer: 'Yes, WhatsApp charges a small fee per conversation (24-hour window) initiated by the business. User-initiated conversations are often free or cheaper.' },
+    { question: 'Does it support images and videos?', answer: 'Yes, you can send and receive images, videos, PDFs, and documents directly within the CRM interface.' },
+    { question: 'What happens if I get blocked?', answer: 'We provide tools to manage your "Quality Rating" and ensure compliance with Meta\'s policies to prevent blocking. We also support template pre-approval.' }
+  ];
+
   sendMessage() {
     if (!this.newMessage.trim()) return;
     this.messages.update(msgs => [...msgs, { id: Date.now(), text: this.newMessage, sender: 'me' }]);
@@ -243,5 +268,9 @@ export class WhatsappComponent {
     setTimeout(() => {
        this.messages.update(msgs => [...msgs, { id: Date.now(), text: "That sounds perfect. How do I sign up?", sender: 'them' }]);
     }, 2000);
+  }
+
+  toggleFaq(index: number) {
+    this.openFaqIndex.update(current => (current === index ? null : index));
   }
 }

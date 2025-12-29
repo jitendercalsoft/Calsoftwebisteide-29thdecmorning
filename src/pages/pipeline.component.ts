@@ -1,7 +1,11 @@
-
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KanbanBoardComponent } from '../components/kanban-board.component';
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
 
 @Component({
   selector: 'app-pipeline',
@@ -83,28 +87,51 @@ import { KanbanBoardComponent } from '../components/kanban-board.component';
 
       <!-- FAQ Section -->
       <div class="mt-20 pt-12 border-t border-slate-200">
-        <h2 class="text-3xl font-bold text-slate-900 mb-10 text-center">Frequently Asked Questions</h2>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-2">Can I customize the deal stages?</h3>
-                <p class="text-slate-600 text-sm">Yes, you can rename, add, or remove stages to match your specific sales process. You can also assign custom win probabilities to each stage.</p>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+          <p class="text-lg text-slate-500 mt-2">Have questions? We've got answers.</p>
+        </div>
+        <div class="space-y-4 max-w-4xl mx-auto">
+          @for (faq of faqs; track $index; let i = $index) {
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition-all duration-300">
+              <button (click)="toggleFaq(i)" class="w-full flex justify-between items-center text-left p-6">
+                <span class="font-bold text-lg text-slate-900">{{ faq.question }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-500 transition-transform duration-300" [class.rotate-180]="openFaqIndex() === i">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+              @if (openFaqIndex() === i) {
+                <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed animate-fade-in">
+                  <p [innerHTML]="faq.answer"></p>
+                </div>
+              }
             </div>
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-2">How many pipelines can I create?</h3>
-                <p class="text-slate-600 text-sm">The Basic plan includes 1 pipeline. Pro and Enterprise plans allow for multiple pipelines (e.g., separate pipelines for Direct Sales, Partnerships, and Renewals).</p>
-            </div>
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-2">What happens to "Lost" deals?</h3>
-                <p class="text-slate-600 text-sm">Lost deals are archived but remain in your database. You can filter them later for "Win-Back" campaigns or analysis.</p>
-            </div>
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                <h3 class="font-bold text-slate-900 mb-2">Does it work on mobile?</h3>
-                <p class="text-slate-600 text-sm">Absolutely. Our mobile app (iOS and Android) gives you full access to your pipeline, so you can update deal stages while on the go.</p>
-            </div>
+          }
         </div>
       </div>
-
     </div>
-  `
+  `,
+  styles: [`
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+  `]
 })
-export class PipelineComponent {}
+export class PipelineComponent {
+  openFaqIndex = signal<number | null>(null);
+
+  faqs: FaqItem[] = [
+    { question: 'Can I customize the deal stages?', answer: 'Yes, you can rename, add, or remove stages to match your specific sales process. You can also assign custom win probabilities to each stage.' },
+    { question: 'How many pipelines can I create?', answer: 'The Basic plan includes 1 pipeline. Pro and Enterprise plans allow for multiple pipelines (e.g., separate pipelines for Direct Sales, Partnerships, and Renewals).' },
+    { question: 'What happens to "Lost" deals?', answer: 'Lost deals are archived but remain in your database. You can filter them later for "Win-Back" campaigns or analysis.' },
+    { question: 'Does it work on mobile?', answer: 'Absolutely. Our mobile app (iOS and Android) gives you full access to your pipeline, so you can update deal stages while on the go.' }
+  ];
+
+  toggleFaq(index: number) {
+    this.openFaqIndex.update(current => (current === index ? null : index));
+  }
+}

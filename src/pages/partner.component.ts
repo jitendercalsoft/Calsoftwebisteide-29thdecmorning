@@ -124,35 +124,85 @@ interface FaqItem {
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="flex items-start gap-4">
-                    <img class="w-16 h-16" src="https://www.calsoftgroup.com/ecom-gateway/ecom-svc-core-1.0-SNAPSHOT/api/core/download?fileName=/home/1RecurringRevenueModell.png" alt="Recurring Revenue Model">
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-3xl">autorenew</span>
+                    </div>
                     <div>
                         <h4 class="font-bold text-slate-800">Recurring Revenue Model</h4>
-                        <p class="text-sm text-slate-500">Earn residual income for as long as your referred clients stay active.</p>
+                        <p class="text-sm text-slate-500 mt-1">Earn residual income for as long as your referred clients stay active.</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-4">
-                    <h4 class="font-bold text-slate-800">No Investment or Inventory Needed</h4>
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-3xl">account_balance_wallet</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800">No Investment or Inventory Needed</h4>
+                        <p class="text-sm text-slate-500 mt-1">Start earning without any upfront costs or the need to manage stock.</p>
+                    </div>
                 </div>
                 <div class="flex items-start gap-4">
-                    <h4 class="font-bold text-slate-800">Free Access to Sales Tools & Demos</h4>
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-3xl">preview</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800">Free Access to Sales Tools & Demos</h4>
+                        <p class="text-sm text-slate-500 mt-1">Utilize our marketing materials and product demos to help you sell effectively.</p>
+                    </div>
                 </div>
                 <div class="flex items-start gap-4">
-                    <h4 class="font-bold text-slate-800">Zero Commercial Commitment</h4>
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-3xl">handshake</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800">Zero Commercial Commitment</h4>
+                        <p class="text-sm text-slate-500 mt-1">Join a flexible program with no binding contracts or minimum sales quotas.</p>
+                    </div>
                 </div>
                 <div class="flex items-start gap-4">
-                    <h4 class="font-bold text-slate-800">Flexible Business Opportunities</h4>
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-3xl">lightbulb</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800">Flexible Business Opportunities</h4>
+                        <p class="text-sm text-slate-500 mt-1">Choose how you want to partner, from simple referrals to white-label solutions.</p>
+                    </div>
                 </div>
                 <div class="flex items-start gap-4">
-                    <h4 class="font-bold text-slate-800">Exclusive Partner Discounts</h4>
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-3xl">sell</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800">Exclusive Partner Discounts</h4>
+                        <p class="text-sm text-slate-500 mt-1">Access special pricing on Calsoft products for your own use and for your clients.</p>
+                    </div>
                 </div>
                  <div class="flex items-start gap-4">
-                    <h4 class="font-bold text-slate-800">Dedicated Support & Training</h4>
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-3xl">support_agent</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800">Dedicated Support & Training</h4>
+                        <p class="text-sm text-slate-500 mt-1">Get one-on-one support and comprehensive training from our partner success team.</p>
+                    </div>
                 </div>
                  <div class="flex items-start gap-4">
-                    <h4 class="font-bold text-slate-800">Wide Product Range</h4>
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-3xl">widgets</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800">Wide Product Range</h4>
+                        <p class="text-sm text-slate-500 mt-1">Offer a diverse suite of solutions including CRM, ERP, and eCommerce to fit any client.</p>
+                    </div>
                 </div>
                  <div class="flex items-start gap-4">
-                    <h4 class="font-bold text-slate-800">Global Opportunity</h4>
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-3xl">public</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800">Global Opportunity</h4>
+                        <p class="text-sm text-slate-500 mt-1">Tap into a worldwide market with a brand that's recognized and trusted globally.</p>
+                    </div>
                 </div>
             </div>
         </div>
