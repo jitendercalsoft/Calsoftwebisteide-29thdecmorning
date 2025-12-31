@@ -1,3 +1,4 @@
+
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
@@ -119,7 +120,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
               <a routerLink="/pricing" class="text-sm font-semibold text-slate-700 hover:text-[#ff5c35] transition-colors">Pricing</a>
               <a routerLink="/blog" class="text-sm font-semibold text-slate-700 hover:text-[#ff5c35] transition-colors">Blog</a>
               <a routerLink="/partner" class="text-sm font-semibold text-slate-700 hover:text-[#ff5c35] transition-colors">Partner</a>
-              <a routerLink="/about" class="text-sm font-semibold text-slate-700 hover:text-[#ff5c35] transition-colors">Company</a>
+              <a href="https://www.calsoftgroup.com/" target="_blank" class="text-sm font-semibold text-slate-700 hover:text-[#ff5c35] transition-colors">Company</a>
             </div>
 
             <!-- CTA Actions -->
@@ -156,7 +157,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
             </div>
             <div class="border-t border-slate-100 pt-2 space-y-1">
                 <a routerLink="/pricing" (click)="toggleMobileMenu()" class="block px-4 py-3 text-slate-700 font-semibold hover:bg-slate-50 rounded-lg">Pricing</a>
-                <a routerLink="/about" (click)="toggleMobileMenu()" class="block px-4 py-3 text-slate-700 font-semibold hover:bg-slate-50 rounded-lg">About Us</a>
+                <a href="https://www.calsoftgroup.com/" target="_blank" (click)="toggleMobileMenu()" class="block px-4 py-3 text-slate-700 font-semibold hover:bg-slate-50 rounded-lg">About Us</a>
                 <a routerLink="/partner" (click)="toggleMobileMenu()" class="block px-4 py-3 text-slate-700 font-semibold hover:bg-slate-50 rounded-lg">Partner Program</a>
             </div>
             <div class="pt-4">
@@ -223,7 +224,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
                 <div>
                     <h4 class="text-white font-bold mb-6">Company</h4>
                     <ul class="space-y-3 text-sm">
-                        <li><a routerLink="/about" class="hover:text-[#ff5c35] transition-colors">About Us</a></li>
+                        <li><a href="https://www.calsoftgroup.com/" target="_blank" class="hover:text-[#ff5c35] transition-colors">About Us</a></li>
                         <li><a href="#" class="hover:text-[#ff5c35] transition-colors">Careers</a></li>
                         <li><a href="#" class="hover:text-[#ff5c35] transition-colors">Investor Relations</a></li>
                         <li><a href="#" class="hover:text-[#ff5c35] transition-colors">Contact Us</a></li>

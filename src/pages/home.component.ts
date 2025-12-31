@@ -641,25 +641,32 @@ interface FaqItem {
 export class HomeComponent implements OnInit, OnDestroy {
   testimonials: Testimonial[] = [
     {
-      quote: "Calsoft CRM has been a game-changer. We've seen a <strong>40% reduction</strong> in our sales cycle time, and the visual pipeline gives me a level of clarity I never had with spreadsheets. It’s the enterprise power we needed, without the enterprise complexity.",
-      name: 'Sarah Connor',
-      title: 'Head of Sales',
-      company: 'Cyberdyne Systems',
-      imgSrc: 'https://picsum.photos/seed/sarah/100/100'
+      quote: "I found the application well-structured, easy to follow, and user-friendly. The functionalities seem highly practical for real-world use. The demo team explained everything patiently.",
+      name: 'Prakash PL',
+      title: 'Local Guide',
+      company: 'Early Adopter',
+      imgSrc: 'https://ui-avatars.com/api/?name=Prakash+PL&background=random' 
     },
     {
-      quote: "The automation features are incredible. Our speed-to-lead has improved by <strong>2.5x</strong>, and no lead ever falls through the cracks. It's like having a digital assistant for every single sales rep on my team.",
-      name: 'John Anderton',
-      title: 'VP of Growth',
-      company: 'PreCrime Inc.',
-      imgSrc: 'https://picsum.photos/seed/john/100/100'
+      quote: "Good CRM for marketing purposes. Whole team done a good job and satisfied work for my business.",
+      name: 'Arun Pandiyan',
+      title: 'Local Guide',
+      company: 'Marketing Business',
+      imgSrc: 'https://ui-avatars.com/api/?name=Arun+Pandiyan&background=random'
     },
     {
-      quote: "As a startup, we need tools that are both powerful and affordable. Calsoft CRM's pricing is transparent and scales with us. The real-time reporting gives me the data I need to report to our investors with confidence.",
-      name: 'Ellen Ripley',
-      title: 'Founder & CEO',
-      company: 'Weyland-Yutani Corp',
-      imgSrc: 'https://picsum.photos/seed/ellen/100/100'
+      quote: "Highly satisfied, product handover for our further process.",
+      name: 'Puthusu Stores',
+      title: 'Verified Customer',
+      company: 'Retail Store',
+      imgSrc: 'https://ui-avatars.com/api/?name=Puthusu+Stores&background=0D9488&color=fff'
+    },
+    {
+      quote: "Excellent Work doing very helpful for me, Thank you So much California Software Company.",
+      name: 'G Alagesan',
+      title: 'Verified Reviewer',
+      company: 'Client',
+      imgSrc: 'https://ui-avatars.com/api/?name=G+Alagesan&background=0891b2&color=fff'
     }
   ];
 
