@@ -40,6 +40,14 @@ interface SequenceStep {
     <div class="px-4 max-w-7xl mx-auto pb-24">
       
       <!-- Value Props (Horizontal Scroll on Mobile) -->
+      
+      <!-- Swipe Hint for Mobile -->
+      <div class="md:hidden flex justify-end mb-2 px-4">
+        <span class="inline-flex items-center gap-1 text-xs font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">
+            Swipe <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+        </span>
+      </div>
+
       <div class="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 md:grid md:grid-cols-3 md:gap-8 pb-6 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 mb-16 md:mb-24">
          <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all min-w-[80vw] md:min-w-0 snap-center">
             <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
@@ -73,6 +81,14 @@ interface SequenceStep {
       <!-- NEW SECTION: Why Calsoft CRM with Built-in Sequences? -->
       <div class="mb-16 md:mb-24">
         <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-8 md:mb-10 text-center">Why Calsoft CRM with Built-in Sequences?</h2>
+        
+        <!-- Swipe Hint for Mobile -->
+        <div class="md:hidden flex justify-end mb-2 px-4">
+            <span class="inline-flex items-center gap-1 text-xs font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">
+                Swipe <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+            </span>
+        </div>
+
         <div class="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6 pb-6 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
           <!-- Card 1 -->
           <div class="bg-white p-6 rounded-xl border-2 border-slate-100 hover:border-blue-500 transition-colors text-center shadow-sm min-w-[60vw] md:min-w-0 snap-center">

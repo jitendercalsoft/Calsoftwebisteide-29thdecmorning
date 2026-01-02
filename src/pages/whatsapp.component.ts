@@ -113,6 +113,14 @@ interface FaqItem {
       </div>
       
       <!-- Key Features Grid (Horizontal Scroll on Mobile) -->
+      
+      <!-- Swipe Hint for Mobile -->
+      <div class="md:hidden flex justify-end mb-2 px-4">
+        <span class="inline-flex items-center gap-1 text-xs font-bold text-slate-400 bg-white px-2 py-1 rounded-full border border-slate-200">
+            Swipe <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+        </span>
+      </div>
+
       <div class="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 mb-16 pb-6 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
         <div class="bg-slate-50 p-6 rounded-lg hover:shadow-md transition-shadow min-w-[75vw] md:min-w-0 snap-center">
            <div class="text-green-600 mb-3">

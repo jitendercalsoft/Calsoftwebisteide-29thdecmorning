@@ -108,6 +108,14 @@ import { CommonModule } from '@angular/common';
             </div>
 
             <!-- Stats (Horizontal Scroll Mobile) -->
+            
+            <!-- Swipe Hint for Mobile -->
+            <div class="md:hidden flex justify-end mb-2 px-4">
+                <span class="inline-flex items-center gap-1 text-xs font-bold text-slate-400 bg-white px-2 py-1 rounded-full border border-slate-200">
+                    Swipe <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                </span>
+            </div>
+
             <div class="flex flex-nowrap overflow-x-auto gap-8 mb-16 md:mb-20 border-y border-slate-200 py-8 md:py-12 bg-white rounded-xl shadow-sm px-8 justify-between md:grid md:grid-cols-4 md:overflow-visible">
                 <div class="text-center min-w-[100px]">
                     <div class="text-3xl md:text-4xl font-bold text-indigo-600 mb-2">1992</div>
@@ -131,6 +139,13 @@ import { CommonModule } from '@angular/common';
             <div class="text-center mb-12">
                  <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-8 md:mb-12">Built For</h2>
                  
+                 <!-- Swipe Hint for Mobile -->
+                 <div class="md:hidden flex justify-end mb-2 px-4">
+                    <span class="inline-flex items-center gap-1 text-xs font-bold text-slate-400 bg-white px-2 py-1 rounded-full border border-slate-200">
+                        Swipe <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                    </span>
+                 </div>
+
                  <div class="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 md:grid md:grid-cols-3 md:gap-8 text-left pb-6 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
                      <div class="bg-white p-6 md:p-8 rounded-xl border border-slate-200 shadow-sm min-w-[75vw] md:min-w-0 snap-center">
                          <div class="w-12 h-12 bg-blue-50 rounded-lg shadow-sm flex items-center justify-center text-blue-600 mb-4 font-bold text-xl">

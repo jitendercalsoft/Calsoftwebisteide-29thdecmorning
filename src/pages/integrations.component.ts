@@ -54,6 +54,13 @@ interface FaqItem {
       <!-- Main Content -->
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 md:-mt-10 relative z-20">
         
+        <!-- Swipe Hint for Mobile -->
+        <div class="md:hidden flex justify-end mb-2">
+            <span class="inline-flex items-center gap-1 text-xs font-bold text-slate-400 bg-white px-2 py-1 rounded-full shadow-sm">
+                Swipe <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+            </span>
+        </div>
+
         <!-- Categories (Scrollable on mobile) -->
         <div class="flex flex-nowrap overflow-x-auto gap-2 mb-8 md:mb-10 pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:justify-center md:flex-wrap">
           @for (cat of categories; track cat) {

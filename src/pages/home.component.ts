@@ -191,6 +191,13 @@ interface FaqItem {
         <p class="text-lg md:text-xl text-slate-500">Powerful features designed to make you proactive.</p>
       </div>
 
+      <!-- Swipe Hint for Mobile -->
+      <div class="md:hidden flex justify-end mb-2 px-4">
+        <span class="inline-flex items-center gap-1 text-xs font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">
+            Swipe <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+        </span>
+      </div>
+
       <!-- Mobile: Horizontal Scroll | Desktop: Grid -->
       <div class="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 pb-6 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
         
@@ -286,6 +293,13 @@ interface FaqItem {
         </p>
       </div>
       
+      <!-- Swipe Hint for Mobile -->
+      <div class="md:hidden flex justify-end mb-2 px-4">
+        <span class="inline-flex items-center gap-1 text-xs font-bold text-slate-400 bg-white px-2 py-1 rounded-full border border-slate-200">
+            Swipe <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+        </span>
+      </div>
+
       <div class="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 md:grid md:grid-cols-3 md:gap-8 pb-6 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
         <!-- Startups -->
         <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-sm flex flex-col items-center text-center min-w-[80vw] sm:min-w-[45vw] md:min-w-0 snap-center">
@@ -331,6 +345,13 @@ interface FaqItem {
         <h2 class="text-2xl md:text-3xl font-bold text-slate-900">How Calsoft CRM Works</h2>
       </div>
       
+      <!-- Swipe Hint for Mobile -->
+      <div class="md:hidden flex justify-end mb-2 px-4">
+        <span class="inline-flex items-center gap-1 text-xs font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">
+            Swipe <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+        </span>
+      </div>
+
       <div class="relative">
         <!-- Connecting lines (Desktop only) -->
         <div class="hidden lg:block absolute top-1/2 left-0 w-full h-px -mt-10">

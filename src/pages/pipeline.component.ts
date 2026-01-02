@@ -31,6 +31,13 @@ interface FaqItem {
                     A sales pipeline isn't just a tracking tool—it's the visual roadmap of your revenue engine. It transforms a chaotic list of leads into a structured process that drives growth.
                 </p>
                 
+                <!-- Swipe Hint for Mobile -->
+                <div class="md:hidden flex justify-end mb-2">
+                    <span class="inline-flex items-center gap-1 text-xs font-bold text-indigo-200 bg-indigo-800/50 px-2 py-1 rounded-full border border-indigo-700/50">
+                        Swipe <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                    </span>
+                </div>
+
                 <div class="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6 pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
                     <!-- Benefit 1 -->
                     <div class="bg-indigo-800/50 p-6 rounded-xl border border-indigo-700/50 backdrop-blur-sm min-w-[75vw] md:min-w-0 snap-center">
@@ -101,6 +108,14 @@ interface FaqItem {
       </div>
 
       <!-- Features (Horizontal Scroll on Mobile) -->
+      
+      <!-- Swipe Hint for Mobile -->
+      <div class="md:hidden flex justify-end mb-2 px-4">
+        <span class="inline-flex items-center gap-1 text-xs font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">
+            Swipe <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+        </span>
+      </div>
+
       <div class="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 md:grid md:grid-cols-3 md:gap-8 mb-12 md:mb-16 pb-6 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
         <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm min-w-[80vw] md:min-w-0 snap-center">
           <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4">
