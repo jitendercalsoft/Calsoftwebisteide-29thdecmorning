@@ -1,3 +1,4 @@
+
 import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -23,18 +24,18 @@ interface FaqItem {
     <div class="bg-slate-50 min-h-screen pb-20">
       
       <!-- Header -->
-      <div class="bg-slate-900 text-white pt-16 pb-24 relative overflow-hidden">
+      <div class="bg-slate-900 text-white pt-24 pb-20 md:pt-16 md:pb-24 relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 class="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight">Integration Marketplace</h1>
-          <p class="text-xl text-slate-300 max-w-2xl mx-auto mb-10">
+          <h1 class="text-3xl md:text-5xl font-extrabold mb-4 md:mb-6 tracking-tight">Integration Marketplace</h1>
+          <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-8 md:mb-10">
             Supercharge your CRM by connecting your favorite tools. 
-            Sync leads, automate scheduling, and streamline communication in one click.
+            Sync leads, automate scheduling, and streamline communication.
           </p>
           
           <!-- Search Bar -->
           <div class="max-w-xl mx-auto relative">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <svg class="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
               </svg>
@@ -43,7 +44,7 @@ interface FaqItem {
               type="text" 
               [value]="searchQuery()"
               (input)="updateSearch($event)"
-              class="block w-full pl-10 pr-3 py-4 border-none rounded-full leading-5 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-xl"
+              class="block w-full pl-11 pr-4 py-3 md:py-4 border-none rounded-full leading-5 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-xl text-sm md:text-base"
               placeholder="Search integrations (e.g., 'Google', 'Meta')..."
             >
           </div>
@@ -51,14 +52,14 @@ interface FaqItem {
       </div>
 
       <!-- Main Content -->
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 md:-mt-10 relative z-20">
         
-        <!-- Categories -->
-        <div class="flex flex-wrap justify-center gap-2 mb-10">
+        <!-- Categories (Scrollable on mobile) -->
+        <div class="flex flex-nowrap overflow-x-auto gap-2 mb-8 md:mb-10 pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:justify-center md:flex-wrap">
           @for (cat of categories; track cat) {
             <button 
               (click)="selectedCategory.set(cat)"
-              class="px-5 py-2 rounded-full text-sm font-semibold transition-all shadow-sm"
+              class="px-4 md:px-5 py-2 rounded-full text-sm font-semibold transition-all shadow-sm whitespace-nowrap"
               [class.bg-indigo-600]="selectedCategory() === cat"
               [class.text-white]="selectedCategory() === cat"
               [class.bg-white]="selectedCategory() !== cat"
@@ -70,14 +71,14 @@ interface FaqItem {
         </div>
 
         <!-- Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           @for (app of filteredIntegrations(); track app.id) {
-            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full">
+            <div class="bg-white rounded-xl border border-slate-200 p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full">
               <div class="flex justify-between items-start mb-4">
-                <div class="w-14 h-14 rounded-xl flex items-center justify-center text-white text-2xl font-bold shadow-sm" [ngClass]="app.color">
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center text-white text-xl md:text-2xl font-bold shadow-sm shrink-0" [ngClass]="app.color">
                   <!-- Dynamic Initials or Icon based on app name -->
                   @if (app.id === 'meta') {
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
                   } @else if (app.id === 'google') {
                     <span class="font-bold">G</span>
                   } @else if (app.id === 'calendly') {
@@ -96,16 +97,16 @@ interface FaqItem {
               </div>
               
               <div class="flex-1">
-                <h3 class="text-lg font-bold text-slate-900 mb-2">{{ app.name }}</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-4">{{ app.description }}</p>
+                <h3 class="text-base md:text-lg font-bold text-slate-900 mb-2">{{ app.name }}</h3>
+                <p class="text-slate-500 text-xs md:text-sm leading-relaxed mb-4">{{ app.description }}</p>
                 <div class="flex flex-wrap gap-2 mb-4">
-                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] md:text-xs font-medium bg-slate-100 text-slate-800">
                     {{ app.category }}
                   </span>
                 </div>
               </div>
 
-              <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
                  @if (app.status === 'Active') {
                    <div class="flex items-center text-green-600 text-sm font-semibold gap-1">
                      <span class="w-2 h-2 rounded-full bg-green-500"></span>
@@ -123,26 +124,25 @@ interface FaqItem {
         </div>
 
         <!-- Missing Integration CTA -->
-        <div class="mt-16 bg-white rounded-2xl p-8 border border-slate-200 text-center shadow-sm">
-           <h3 class="text-xl font-bold text-slate-900 mb-2">Can't find what you're looking for?</h3>
-           <p class="text-slate-600 mb-6">We add new integrations every week. Request a specific tool and we'll prioritize it.</p>
-           <button class="px-6 py-3 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition-colors">
+        <div class="mt-12 md:mt-16 bg-white rounded-2xl p-6 md:p-8 border border-slate-200 text-center shadow-sm">
+           <h3 class="text-lg md:text-xl font-bold text-slate-900 mb-2">Can't find what you're looking for?</h3>
+           <p class="text-slate-600 mb-6 text-sm">We add new integrations every week. Request a specific tool and we'll prioritize it.</p>
+           <button class="px-6 py-3 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition-colors text-sm">
              Request Integration
            </button>
         </div>
 
         <!-- FAQ Section -->
-        <div class="mt-20 pt-12 border-t border-slate-200">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
-            <p class="text-lg text-slate-500 mt-2">Have questions? We've got answers.</p>
+        <div class="mt-16 pt-12 border-t border-slate-200">
+          <div class="text-center mb-10">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
           </div>
           <div class="space-y-4 max-w-4xl mx-auto">
             @for (faq of faqs; track $index; let i = $index) {
               <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition-all duration-300">
                 <button (click)="toggleFaq(i)" class="w-full flex justify-between items-center text-left p-6">
-                  <span class="font-bold text-lg text-slate-900">{{ faq.question }}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-500 transition-transform duration-300" [class.rotate-180]="openFaqIndex() === i">
+                  <span class="font-bold text-base md:text-lg text-slate-900 pr-4">{{ faq.question }}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-500 transition-transform duration-300 flex-shrink-0" [class.rotate-180]="openFaqIndex() === i">
                     <path d="m6 9 6 6 6-6"/>
                   </svg>
                 </button>

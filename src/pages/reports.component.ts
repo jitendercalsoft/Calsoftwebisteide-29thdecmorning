@@ -1,3 +1,4 @@
+
 import { Component, ElementRef, ViewChild, AfterViewInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as d3 from 'd3';
@@ -26,9 +27,9 @@ interface FaqItem {
     <div class="relative bg-slate-50 pt-10 pb-12 px-4 max-w-7xl mx-auto">
       <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] opacity-20"></div>
       
-      <div class="mb-16 text-center max-w-3xl mx-auto">
+      <div class="mb-12 text-center max-w-3xl mx-auto">
         <span class="inline-block py-1 px-3 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-wide mb-4">Executive Analytics</span>
-        <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">Data That Drives Dominance</h1>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">Data That Drives Dominance</h1>
         <p class="text-slate-600 text-lg">
           Gain total visibility into sales performance, spot bottlenecks instantly, and track KPIs in real-time.
         </p>
@@ -43,7 +44,7 @@ interface FaqItem {
                Visualizes the total value of deals currently in each stage of the pipeline.
              </p>
            </div>
-           <div #barChartContainer class="w-full h-[300px] flex-1"></div>
+           <div #barChartContainer class="w-full h-[250px] md:h-[300px] flex-1"></div>
         </div>
 
         <!-- Chart 2: Conversion Funnel (Mocked with simple HTML/CSS for variety) -->
@@ -130,57 +131,42 @@ interface FaqItem {
       
        <!-- New Reports Section -->
       <div class="border-t border-slate-200 pt-16">
-        <div class="grid md:grid-cols-12 gap-12 items-center mb-16">
-            <div class="md:col-span-5 text-center md:text-left">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4">A Report for Every Metric</h2>
-                <p class="text-slate-600 leading-relaxed">
-                   From lead generation to deal closure, every report is designed to help you optimize performance, increase conversions, and scale your sales operations effectively.
-                </p>
-            </div>
-            <div class="md:col-span-7">
-                 <!-- Illustration -->
-                 <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 flex items-center gap-6">
-                    <div class="w-32 h-32 bg-indigo-50 rounded-2xl flex-shrink-0 flex items-center justify-center text-indigo-300">
-                       <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-                    </div>
-                    <div class="flex-1">
-                      <div class="h-4 bg-slate-200 rounded w-3/4 mb-3 animate-pulse"></div>
-                      <div class="h-2 bg-slate-100 rounded w-full mb-2 animate-pulse" style="animation-delay: 0.1s;"></div>
-                      <div class="h-2 bg-slate-100 rounded w-5/6 animate-pulse" style="animation-delay: 0.2s;"></div>
-                    </div>
-                 </div>
-            </div>
-        </div>
-
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-8 md:mb-12 text-center md:text-left">A Report for Every Metric</h2>
 
         @for (category of reportCategories; track category.title) {
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-4">
-                    <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center shadow-sm" [innerHTML]="category.icon"></div>
-                    <span>{{ category.title }}</span>
-                </h3>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Use details/summary for mobile accordion behavior, simple div for desktop -->
+            <details class="group mb-4 md:mb-12 bg-white md:bg-transparent rounded-xl border border-slate-200 md:border-none shadow-sm md:shadow-none open:bg-slate-50 md:open:bg-transparent">
+                <summary class="list-none flex items-center justify-between cursor-pointer md:cursor-auto p-4 md:p-0">
+                    <h3 class="text-lg md:text-xl font-bold text-slate-800 flex items-center gap-4">
+                        <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center shadow-sm" [innerHTML]="category.icon"></div>
+                        <span>{{ category.title }}</span>
+                    </h3>
+                    <span class="md:hidden text-slate-400 group-open:rotate-180 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </span>
+                </summary>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 p-4 md:p-0 border-t border-slate-100 md:border-t-0 mt-2 md:mt-6">
                     @for (report of category.reports; track report.title) {
-                        <div class="bg-white p-4 rounded-xl border border-slate-200 hover:border-indigo-300 hover:shadow-lg transition-all group flex items-start gap-4 hover:-translate-y-1">
-                            <div class="mt-1 text-slate-300 group-hover:text-indigo-500 transition-colors">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 hover:border-indigo-300 hover:shadow-lg transition-all group/card flex items-start gap-4 hover:-translate-y-1">
+                            <div class="mt-1 text-slate-300 group-hover/card:text-indigo-500 transition-colors">
                                 <span class="material-symbols-outlined">arrow_right_alt</span>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-slate-900">{{ report.title }}</h4>
+                                <h4 class="font-semibold text-slate-900 text-sm">{{ report.title }}</h4>
                                 <p class="text-xs text-slate-500 mt-1 leading-relaxed">{{ report.description }}</p>
                             </div>
                         </div>
                     }
                 </div>
-            </div>
+            </details>
         }
       </div>
 
       <!-- FAQ Section -->
       <div class="mt-20 pt-12 border-t border-slate-200">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
-          <p class="text-lg text-slate-500 mt-2">Have questions? We've got answers.</p>
+          <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
         </div>
         <div class="space-y-4 max-w-4xl mx-auto">
           @for (faq of faqs; track $index; let i = $index) {
@@ -210,6 +196,10 @@ interface FaqItem {
     .animate-fade-in {
       animation: fadeIn 0.3s ease-out forwards;
     }
+    /* Force details to be open on desktop via CSS is tricky, logic handled via class normally but we use md:grid to override content visibility if needed, or simple css */
+    @media (min-width: 768px) {
+        details > div { display: grid !important; }
+    }
   `]
 })
 export class ReportsComponent implements AfterViewInit {
@@ -229,56 +219,36 @@ export class ReportsComponent implements AfterViewInit {
       title: 'Lead & Call Reports',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
       reports: [
-        { title: 'Lead Call Recording Report', description: 'Review recorded calls to monitor conversation quality, ensure compliance, and improve sales pitches.' },
-        { title: 'Lead Call Report', description: 'Track all inbound and outbound calls linked to leads, including call status and duration.' },
-        { title: 'Lead Meeting Summary', description: 'Get a consolidated view of scheduled and completed meetings with outcomes and follow-up actions.' }
+        { title: 'Lead Call Recording Report', description: 'Review recorded calls to monitor conversation quality.' },
+        { title: 'Lead Call Report', description: 'Track all inbound and outbound calls linked to leads.' },
+        { title: 'Lead Meeting Summary', description: 'Get a consolidated view of scheduled and completed meetings.' }
       ]
     },
     {
-      title: 'Lead Source & Status Analysis',
+      title: 'Lead Source & Status',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>',
       reports: [
-        { title: 'Lead Source Report', description: 'Analyze lead performance across different sources such as website, ads, WhatsApp, and referrals.' },
-        { title: 'Lead Status Report', description: 'Monitor lead progression across stages to identify high-intent prospects and drop-offs.' },
-        { title: 'Lead Type Wise Report', description: 'Segment leads based on business type, interest, or category for targeted sales strategies.' }
+        { title: 'Lead Source Report', description: 'Analyze lead performance across different sources.' },
+        { title: 'Lead Status Report', description: 'Monitor lead progression across stages.' },
+        { title: 'Lead Type Wise Report', description: 'Segment leads based on business type.' }
       ]
     },
     {
-      title: 'User & Team Performance Reports',
+      title: 'User & Team Performance',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
       reports: [
-        { title: 'User Wise Status Report', description: 'Track how each sales representative manages lead stages and closures.' },
+        { title: 'User Wise Status Report', description: 'Track how each sales representative manages lead stages.' },
         { title: 'User Wise Source Report', description: 'Evaluate which lead sources are performing best for each user.' },
-        { title: 'Lead User Report', description: 'View all leads assigned to each team member in one place.' },
-        { title: 'Sales Target Report', description: 'Compare assigned targets with actual achievements to track sales performance in real time.' }
+        { title: 'Sales Target Report', description: 'Compare assigned targets with actual achievements.' }
       ]
     },
     {
-      title: 'Location-Based Reports',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
-      reports: [
-        { title: 'Lead City Wise Report', description: 'Analyze lead distribution across cities to focus on high-demand locations.' },
-        { title: 'Lead State Wise Report', description: 'Understand state-wise lead performance and regional growth opportunities.' },
-        { title: 'User City Wise Report', description: 'Track user activity and lead handling based on city.' },
-        { title: 'User State Wise Report', description: 'Monitor sales team distribution and performance across states.' }
-      ]
-    },
-    {
-      title: 'Activity & Follow-Up Reports',
+      title: 'Activity & Follow-Up',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/><path d="m15 5 3 3"/></svg>',
       reports: [
         { title: 'Follow Activity Report', description: 'Track all follow-up activities completed by your sales team.' },
         { title: 'Activity Due Report', description: 'Instantly identify pending tasks and overdue follow-ups.' },
-        { title: 'Activity Upcoming Report', description: 'Plan ahead with visibility into upcoming calls, meetings, and reminders.' }
-      ]
-    },
-    {
-      title: 'Product & Form-Based Reports',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M12 18h-4"/><path d="M16 14h-8"/></svg>',
-      reports: [
-        { title: 'Lead Product Report', description: 'Analyze which products or services generate the highest interest and conversions.' },
-        { title: 'Lead Form ID Report', description: 'Track leads generated from specific forms and campaigns.' },
-        { title: 'Lead User Form ID Report', description: 'Measure form performance at a user level for better accountability.' }
+        { title: 'Activity Upcoming Report', description: 'Plan ahead with visibility into upcoming calls and meetings.' }
       ]
     }
   ];
@@ -299,7 +269,7 @@ export class ReportsComponent implements AfterViewInit {
     const element = this.barChartContainer.nativeElement;
     const margin = { top: 20, right: 20, bottom: 30, left: 40 };
     const width = element.offsetWidth - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
+    const height = element.offsetHeight - margin.top - margin.bottom;
 
     const svg = d3.select(element).append('svg')
       .attr('width', width + margin.left + margin.right)

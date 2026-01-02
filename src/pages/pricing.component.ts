@@ -1,5 +1,6 @@
+
 import { Component, signal, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 
 interface Feature {
   name: string;
@@ -22,7 +23,7 @@ interface FaqItem {
 
 @Component({
   selector: 'app-pricing',
-  imports: [CommonModule],
+  imports: [CommonModule, NgTemplateOutlet],
   template: `
     <div class="bg-slate-50 min-h-screen">
       
@@ -69,12 +70,20 @@ interface FaqItem {
         </div>
       </div>
 
-      <!-- Pricing Table -->
+      <!-- Pricing Table Container -->
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 -mt-10 relative z-20">
-        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 ring-1 ring-slate-900/5 pt-6">
+        
+        <!-- Mobile Plan Selector -->
+        <div class="md:hidden flex justify-center mb-8 bg-white p-1.5 rounded-xl border border-slate-200 shadow-lg mx-auto max-w-sm sticky top-24 z-30">
+            <button (click)="selectedPlan.set('basic')" class="flex-1 py-2.5 text-sm font-bold rounded-lg transition-all" [class.bg-slate-800]="selectedPlan() === 'basic'" [class.text-white]="selectedPlan() === 'basic'" [class.text-slate-500]="selectedPlan() !== 'basic'">Basic</button>
+            <button (click)="selectedPlan.set('pro')" class="flex-1 py-2.5 text-sm font-bold rounded-lg transition-all" [class.bg-indigo-600]="selectedPlan() === 'pro'" [class.text-white]="selectedPlan() === 'pro'" [class.text-slate-500]="selectedPlan() !== 'pro'">Pro</button>
+            <button (click)="selectedPlan.set('advanced')" class="flex-1 py-2.5 text-sm font-bold rounded-lg transition-all" [class.bg-slate-800]="selectedPlan() === 'advanced'" [class.text-white]="selectedPlan() === 'advanced'" [class.text-slate-500]="selectedPlan() !== 'advanced'">Advanced</button>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 ring-1 ring-slate-900/5 pt-0 md:pt-6">
             
-            <!-- Plans Header -->
-            <div class="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-200 bg-slate-50">
+            <!-- Desktop Plans Header -->
+            <div class="hidden md:grid grid-cols-4 divide-x divide-slate-200 bg-slate-50">
                 <!-- Title Column -->
                 <div class="p-8 flex flex-col justify-end bg-white md:bg-transparent">
                     <h3 class="text-2xl font-bold text-slate-900">Compare Plans</h3>
@@ -118,11 +127,43 @@ interface FaqItem {
                 </div>
             </div>
 
+            <!-- Mobile Plan Header (Dynamic) -->
+            <div class="md:hidden p-8 text-center bg-slate-50 border-b border-slate-200 relative">
+                 @if (selectedPlan() === 'basic') {
+                    <h3 class="text-lg font-bold text-slate-900">Basic (Starter)</h3>
+                    <div class="mt-4 flex items-baseline justify-center text-slate-900">
+                        <span class="text-4xl font-extrabold tracking-tight">{{ currentPrices().basic }}</span>
+                        <span class="ml-1 text-sm font-medium text-slate-500">/user/mo</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-400 font-medium uppercase tracking-wide">billed {{ billing() }}</p>
+                    <button class="mt-6 w-full bg-white border border-slate-300 text-slate-700 font-bold py-3 px-4 rounded-xl shadow-sm">Get Started</button>
+                 }
+                 @if (selectedPlan() === 'pro') {
+                    <div class="inline-block bg-indigo-600 text-white px-4 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase shadow-lg ring-4 ring-white mb-4">Most Popular</div>
+                    <h3 class="text-lg font-bold text-indigo-900">Pro (Growth)</h3>
+                    <div class="mt-4 flex items-baseline justify-center text-indigo-900">
+                        <span class="text-5xl font-extrabold tracking-tight">{{ currentPrices().pro }}</span>
+                        <span class="ml-1 text-sm font-medium text-indigo-600">/user/mo</span>
+                    </div>
+                    <p class="mt-2 text-xs text-indigo-400 font-medium uppercase tracking-wide">billed {{ billing() }}</p>
+                    <button class="mt-6 w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg">Start Free Trial</button>
+                 }
+                 @if (selectedPlan() === 'advanced') {
+                    <h3 class="text-lg font-bold text-slate-900">Advanced (Enterprise)</h3>
+                    <div class="mt-4 flex items-baseline justify-center text-slate-900">
+                        <span class="text-4xl font-extrabold tracking-tight">{{ currentPrices().advanced }}</span>
+                        <span class="ml-1 text-sm font-medium text-slate-500">/user/mo</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-400 font-medium uppercase tracking-wide">billed {{ billing() }}</p>
+                    <button class="mt-6 w-full bg-slate-900 text-white font-bold py-3 px-4 rounded-xl shadow-lg">Contact Sales</button>
+                 }
+            </div>
+
             <!-- Comparison Rows -->
              @for (cat of categories; track cat.id) {
                 <!-- Category Header -->
-                <div class="bg-slate-100/50 px-8 py-4 border-y border-slate-200 flex items-center gap-3">
-                    <div class="text-indigo-600 p-1.5 bg-indigo-100 rounded-lg" [ngSwitch]="cat.id">
+                <div class="bg-slate-100/50 px-6 md:px-8 py-4 border-y border-slate-200 flex items-center gap-3 sticky top-[168px] md:static z-20 backdrop-blur-md md:backdrop-blur-none">
+                    <div class="text-indigo-600 p-1.5 bg-indigo-100 rounded-lg shrink-0" [ngSwitch]="cat.id">
                          <!-- Icons -->
                          <svg *ngSwitchCase="'core'" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
                          <svg *ngSwitchCase="'comm'" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -141,37 +182,41 @@ interface FaqItem {
                           [class.bg-slate-50]="i % 2 !== 0 && cat.id !== 'soon'"
                           [class.hover:bg-slate-50]="true"> 
                         
-                        <!-- Feature Name -->
-                        <div class="p-4 md:px-8 md:py-5 text-sm font-semibold text-slate-700 flex items-center gap-1.5">
-                            <span>{{ feat.name }}</span>
-                            @if (feat.name.includes('WhatsApp')) {
-                                <div class="relative group cursor-help">
-                                    <span class="material-symbols-outlined text-slate-400 text-sm">info</span>
-                                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-slate-800 text-white text-xs p-3 rounded-lg shadow-lg z-10 hidden group-hover:block text-left font-normal normal-case leading-relaxed">
-                                        WhatsApp Business API setup requires necessary business verification documents as per Meta's policy. Our team will guide you through the process.
+                        <!-- Feature Name (Row for Desktop, Flex Item for Mobile) -->
+                        <div class="p-4 md:px-8 md:py-5 text-sm font-semibold text-slate-700 flex items-center justify-between md:justify-start gap-1.5">
+                            <div class="flex items-center gap-1.5">
+                                <span>{{ feat.name }}</span>
+                                @if (feat.name.includes('WhatsApp')) {
+                                    <div class="relative group cursor-help">
+                                        <span class="material-symbols-outlined text-slate-400 text-sm">info</span>
+                                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-slate-800 text-white text-xs p-3 rounded-lg shadow-lg z-10 hidden group-hover:block text-left font-normal normal-case leading-relaxed">
+                                            WhatsApp Business API setup requires necessary business verification documents as per Meta's policy. Our team will guide you through the process.
+                                        </div>
                                     </div>
-                                </div>
-                            }
+                                }
+                            </div>
+                            
+                            <!-- Mobile Value Display (Right aligned next to name) -->
+                            <div class="md:hidden">
+                                <ng-container *ngTemplateOutlet="valueTemplate; context: { $implicit: getFeatureValue(feat, selectedPlan()) }"></ng-container>
+                            </div>
                         </div>
 
-                        <!-- Basic Value -->
-                        <div class="p-4 md:px-8 md:py-5 flex items-center justify-center text-center md:justify-center bg-opacity-50">
-                            <span class="md:hidden font-bold mr-2 text-xs text-slate-400">Basic: </span>
+                        <!-- Basic Value (Hidden Mobile) -->
+                        <div class="hidden md:flex p-4 md:px-8 md:py-5 items-center justify-center text-center md:justify-center bg-opacity-50">
                             <ng-container *ngTemplateOutlet="valueTemplate; context: { $implicit: feat.basic }"></ng-container>
                         </div>
 
-                        <!-- Pro Value -->
-                        <div class="p-4 md:px-8 md:py-5 flex items-center justify-center text-center md:justify-center relative"
+                        <!-- Pro Value (Hidden Mobile) -->
+                        <div class="hidden md:flex p-4 md:px-8 md:py-5 items-center justify-center text-center md:justify-center relative"
                              [class.bg-indigo-50]="i % 2 === 0" 
-                             [class.bg-indigo-50]="i % 2 !== 0"> <!-- Highlighting Pro column slightly -->
+                             [class.bg-indigo-50]="i % 2 !== 0">
                              <div class="absolute inset-0 bg-indigo-50/50 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none h-full w-full"></div>
-                            <span class="md:hidden font-bold mr-2 text-xs text-indigo-400">Pro: </span>
                             <ng-container *ngTemplateOutlet="valueTemplate; context: { $implicit: feat.pro }"></ng-container>
                         </div>
 
-                        <!-- Advanced Value -->
-                        <div class="p-4 md:px-8 md:py-5 flex items-center justify-center text-center md:justify-center">
-                            <span class="md:hidden font-bold mr-2 text-xs text-slate-400">Advanced: </span>
+                        <!-- Advanced Value (Hidden Mobile) -->
+                        <div class="hidden md:flex p-4 md:px-8 md:py-5 items-center justify-center text-center md:justify-center">
                             <ng-container *ngTemplateOutlet="valueTemplate; context: { $implicit: feat.advanced }"></ng-container>
                         </div>
                      </div>
@@ -249,6 +294,7 @@ interface FaqItem {
 export class PricingComponent {
   currency = signal<'USD' | 'INR'>('INR');
   billing = signal<'monthly' | 'annual'>('annual');
+  selectedPlan = signal<'basic' | 'pro' | 'advanced'>('pro');
 
   pricingData = {
       USD: {
@@ -363,5 +409,9 @@ export class PricingComponent {
   
   toggleFaq(index: number) {
     this.openFaqIndex.update(current => (current === index ? null : index));
+  }
+
+  getFeatureValue(feat: Feature, plan: 'basic' | 'pro' | 'advanced'): string | boolean {
+    return feat[plan];
   }
 }

@@ -1,3 +1,4 @@
+
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -36,8 +37,14 @@ interface FaqItem {
       <!-- Demo Area -->
       <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden flex flex-col md:flex-row h-[700px] md:h-[650px] mb-12">
         
+        <!-- Mobile Toggle Tabs -->
+        <div class="md:hidden flex border-b border-slate-200 bg-slate-50">
+            <button (click)="activeTab.set('controls')" class="flex-1 py-3 text-sm font-bold text-center" [class.bg-white]="activeTab() === 'controls'" [class.text-indigo-600]="activeTab() === 'controls'" [class.text-slate-500]="activeTab() !== 'controls'">Simulator Controls</button>
+            <button (click)="activeTab.set('feed')" class="flex-1 py-3 text-sm font-bold text-center" [class.bg-white]="activeTab() === 'feed'" [class.text-indigo-600]="activeTab() === 'feed'" [class.text-slate-500]="activeTab() !== 'feed'">Live Feed</button>
+        </div>
+
         <!-- Simulation Controls (Left) -->
-        <div class="w-full md:w-1/3 bg-slate-50 border-r border-slate-200 p-6 flex flex-col overflow-y-auto">
+        <div class="w-full md:w-1/3 bg-slate-50 border-r border-slate-200 p-6 flex flex-col overflow-y-auto" [class.hidden]="activeTab() === 'feed' && isMobile()">
           <h3 class="font-bold text-slate-800 mb-2">Lead Simulation</h3>
           <p class="text-sm text-slate-500 mb-6">
             Trigger real-world lead actions or set manual reminders. Watch how the CRM instantly creates prioritized tasks.
@@ -68,7 +75,7 @@ interface FaqItem {
         </div>
 
         <!-- Live Feed (Right) -->
-        <div class="flex-1 bg-white p-6 flex flex-col">
+        <div class="flex-1 bg-white p-6 flex flex-col h-full" [class.hidden]="activeTab() === 'controls' && isMobile()">
           <div class="flex justify-between items-center mb-6">
              <h3 class="font-bold text-slate-800">Live Activity Feed</h3>
              <span class="flex h-3 w-3 relative">
@@ -129,26 +136,23 @@ interface FaqItem {
         <div class="text-center max-w-3xl mx-auto mb-12">
           <h2 class="text-3xl font-bold text-slate-900 mb-4">Never Miss a Follow-Up Again</h2>
           <p class="text-slate-600">
-            Timely follow-ups are the difference between a lost lead and a closed deal. Calsoft CRM’s Reminders and Follow-Ups feature ensures every prospect is contacted at the right time, without relying on memory or manual tracking.
+            Timely follow-ups are the difference between a lost lead and a closed deal. Calsoft CRM’s Reminders and Follow-Ups feature ensures every prospect is contacted at the right time.
           </p>
         </div>
       
         <div class="grid md:grid-cols-2 gap-8">
-          
           <!-- Smart Reminders -->
           <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
             <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-lg flex items-center justify-center mb-4">
               <span class="material-symbols-outlined">notifications_active</span>
             </div>
-            <h3 class="font-bold text-lg mb-2">Smart Reminders That Keep Sales Moving</h3>
+            <h3 class="font-bold text-lg mb-2">Smart Reminders</h3>
             <p class="text-slate-600 text-sm mb-4">
-              Calsoft CRM automatically reminds your team about calls, meetings, and tasks so nothing slips through the cracks. Each reminder is linked directly to the lead, giving your sales team full context before every interaction.
+              Calsoft CRM automatically reminds your team about calls, meetings, and tasks so nothing slips through the cracks.
             </p>
             <ul class="space-y-2 text-sm text-slate-500">
               <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Task reminders</li>
               <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Due and overdue activity alerts</li>
-              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Lead-specific follow-up notifications</li>
-              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Daily activity visibility for sales teams</li>
             </ul>
           </div>
       
@@ -157,86 +161,15 @@ interface FaqItem {
             <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4">
               <span class="material-symbols-outlined">checklist</span>
             </div>
-            <h3 class="font-bold text-lg mb-2">Organized Follow-Ups, Better Conversions</h3>
+            <h3 class="font-bold text-lg mb-2">Organized Follow-Ups</h3>
             <p class="text-slate-600 text-sm mb-4">
-              Plan and manage follow-ups with complete clarity. Whether it’s a call, meeting, or message, every activity is tracked and visible in one place. Sales reps always know what to do next and when to do it.
+              Plan and manage follow-ups with complete clarity. Whether it’s a call, meeting, or message, every activity is tracked.
             </p>
             <ul class="space-y-2 text-sm text-slate-500">
               <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Schedule follow-ups in seconds</li>
-              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Track follow-up history for every lead</li>
-              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Prioritize high-intent prospects</li>
-              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Reduce missed opportunities</li>
+              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Track follow-up history</li>
             </ul>
           </div>
-      
-          <!-- Follow-Up Workflows -->
-          <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
-            <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center mb-4">
-              <span class="material-symbols-outlined">workflow</span>
-            </div>
-            <h3 class="font-bold text-lg mb-2">Follow-Up Workflows with Smart Reminders</h3>
-            <p class="text-slate-600 text-sm mb-4">
-              Calsoft CRM supports structured follow-ups by allowing your sales team to manually create follow-up tasks and set the exact date and time. Once scheduled, the CRM sends timely notifications, ensuring every lead is followed up without delay.
-            </p>
-            <ul class="space-y-2 text-sm text-slate-500">
-              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Manually create follow-up tasks</li>
-              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Set follow-up date and time</li>
-              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Receive timely reminder notifications</li>
-              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Maintain consistent sales execution</li>
-            </ul>
-          </div>
-      
-          <!-- Full Visibility for Managers -->
-          <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
-            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center mb-4">
-              <span class="material-symbols-outlined">manage_search</span>
-            </div>
-            <h3 class="font-bold text-lg mb-2">Full Visibility for Managers</h3>
-            <p class="text-slate-600 text-sm mb-4">
-              Managers get a clear view of pending, completed, and upcoming follow-ups across the team. This helps identify delays, improve accountability, and ensure leads are handled professionally.
-            </p>
-            <ul class="space-y-2 text-sm text-slate-500">
-              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Activity Due & Upcoming views</li>
-              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Team-wise follow-up tracking</li>
-              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Improved sales discipline</li>
-              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>Higher follow-through rates</li>
-            </ul>
-          </div>
-        </div>
-      
-        <!-- Final CTA-like section -->
-        <div class="mt-16 bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-8 rounded-2xl text-center shadow-lg">
-          <h3 class="text-2xl font-bold mb-2">Close More Deals with Perfect Timing</h3>
-          <p class="max-w-2xl mx-auto opacity-90">
-            With Calsoft CRM, your sales team never forgets to follow up, never delays a response, and never loses track of a lead. Every reminder keeps deals moving forward and helps you close more opportunities—faster and smarter.
-          </p>
-        </div>
-      </div>
-
-       <!-- SEO Content Area -->
-      <div class="border-t border-slate-200 pt-12">
-        <h2 class="text-2xl font-bold text-slate-900 mb-6 text-center">Why Automation is Essential for Modern Sales</h2>
-        <div class="grid md:grid-cols-2 gap-12 text-slate-600 leading-relaxed">
-           <div>
-             <h3 class="font-bold text-slate-900 mb-2">Never Miss a Critical Follow-up</h3>
-             <p class="mb-4">
-              While automation handles routine tasks, our manual reminder system ensures high-touch, critical follow-ups are never missed. Set reminders for contract renewals, post-demo check-ins, or any custom task that requires a personal touch at a specific time.
-             </p>
-             <h3 class="font-bold text-slate-900 mb-2">Eliminate Human Error</h3>
-             <p>
-               Sales reps are busy. They forget to follow up. Calsoft CRM acts as a safety net, ensuring every single lead gets nurtured. Whether it's an automated sequence or a manual reminder, our system handles the details so your team can focus on closing.
-             </p>
-           </div>
-           <div>
-             <h3 class="font-bold text-slate-900 mb-2">Nurture the Long Tail</h3>
-             <p class="mb-4">
-               Only 3% of your market is ready to buy <em>right now</em>. The other 97% need nurturing. Our <strong>Drip Campaigns</strong> keep you top-of-mind for months or even years with helpful content, positioning you as the trusted advisor when they are finally ready to sign the check.
-             </p>
-             <h3 class="font-bold text-slate-900 mb-2">Re-Engagement Alerts</h3>
-             <p>
-               Don't let a warm lead go cold. If a previous customer or an old lead re-engages by submitting a new inquiry, the CRM instantly notifies you. This "interest shown again" alert ensures you can prioritize follow-ups with prospects who are actively reconsidering your services.
-             </p>
-           </div>
         </div>
       </div>
 
@@ -299,12 +232,13 @@ export class FollowUpComponent {
   reminderTime = signal('');
 
   openFaqIndex = signal<number | null>(null);
+  activeTab = signal<'controls' | 'feed'>('controls');
   
   faqs: FaqItem[] = [
-      { question: 'How do follow-up reminders work in Calsoft CRM?', answer: 'Sales users manually create follow-up tasks and set the date and time. Calsoft CRM then sends reminder notifications at the scheduled time so no follow-up is missed.' },
-      { question: 'Are follow-up tasks created automatically in Calsoft CRM?', answer: 'No. Follow-up tasks are created manually by users. This gives full control over timing, priority, and the type of follow-up needed for each lead.' },
-      { question: 'Can I change or reschedule a follow-up after creating it?', answer: 'Yes. You can edit, reschedule, or update follow-up tasks at any time based on changes in the lead’s status or conversation progress.' },
-      { question: 'Who receives follow-up notifications?', answer: 'Follow-up notifications are sent to the assigned user for the lead or task, ensuring clear ownership and timely action.' }
+      { question: 'How do follow-up reminders work?', answer: 'Sales users manually create follow-up tasks and set the date and time. Calsoft CRM then sends reminder notifications at the scheduled time.' },
+      { question: 'Are follow-up tasks created automatically?', answer: 'No. Follow-up tasks are created manually by users. This gives full control over timing and priority.' },
+      { question: 'Can I reschedule a follow-up?', answer: 'Yes. You can edit, reschedule, or update follow-up tasks at any time.' },
+      { question: 'Who receives notifications?', answer: 'Follow-up notifications are sent to the assigned user for the lead or task.' }
   ];
   
   setReminder() {
@@ -317,7 +251,12 @@ export class FollowUpComponent {
     });
 
     this.addActivity(`Reminder set: "${this.reminderTitle()}"`, 'reminder', now);
-    setTimeout(() => this.addTask(this.reminderTitle(), 'High', `Due: ${formattedDate}`), 300);
+    setTimeout(() => {
+      this.addTask(this.reminderTitle(), 'High', `Due: ${formattedDate}`);
+      if (this.isMobile()) {
+        this.activeTab.set('feed'); // Auto switch to feed on mobile
+      }
+    }, 300);
 
     // Reset form
     this.reminderTitle.set('');
@@ -335,5 +274,9 @@ export class FollowUpComponent {
 
   toggleFaq(index: number) {
     this.openFaqIndex.update(current => (current === index ? null : index));
+  }
+
+  isMobile(): boolean {
+    return window.innerWidth < 768;
   }
 }
